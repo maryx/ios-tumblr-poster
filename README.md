@@ -23,16 +23,16 @@ This app will make it very simple to queue and post images from your phone onto 
 
 
 ##Core Requirements
- [ ] Can access phone's photos
- [ ] Can log in and out of Tumblr
- [ ] Can post and queue posts to Tumblr on short press (either function is set in Settings)
- [ ] Can add default tags or captions to posts (set in Settings)
- [ ] Can take you to a new screen to crop and rotate photos on hard press, and immediately post/queue the photo when done
+ - [ ] Can access phone's photos
+ - [ ] Can log in and out of Tumblr
+ - [ ] Can post and queue posts to Tumblr on short press (either function is set in Settings)
+ - [ ] Can add default tags or captions to posts (set in Settings)
+ - [ ] Can take you to a new screen to crop and rotate photos on hard press, and immediately post/queue the photo when done
 
 ##Optional Features
- [ ] Multi-image upload per post
- [ ] Can drag image left to queue, and right to post immediately
- [ ] Delete image on upload
+ - [ ] Multi-image upload per post
+ - [ ] Can drag image left to queue, and right to post immediately
+ - [ ] Delete image on upload
 
 ##Wireframe
 ![wireframe](wireframe.png)
