@@ -14,6 +14,7 @@
 		CE3040881BBCAC0B00258482 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3040871BBCAC0B00258482 /* Images.xcassets */; };
 		CE30408B1BBCAC0B00258482 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3040891BBCAC0B00258482 /* LaunchScreen.xib */; };
 		CE3040971BBCAC0B00258482 /* ios_tumblr_posterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3040961BBCAC0B00258482 /* ios_tumblr_posterTests.swift */; };
+		CECF11791BC2165C007887A5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECF11781BC2165C007887A5 /* SettingsViewController.swift */; };
 		CED9D4231BC1D9CC002C7588 /* TumblrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9D4221BC1D9CC002C7588 /* TumblrClient.swift */; };
 		CED9D4271BC1DA58002C7588 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9D4261BC1DA58002C7588 /* LoginViewController.swift */; };
 		CED9D4291BC1DA7E002C7588 /* CameraRollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9D4281BC1DA7E002C7588 /* CameraRollViewController.swift */; };
@@ -43,6 +44,7 @@
 		CE3040901BBCAC0B00258482 /* ios-tumblr-posterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-tumblr-posterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3040951BBCAC0B00258482 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE3040961BBCAC0B00258482 /* ios_tumblr_posterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_tumblr_posterTests.swift; sourceTree = "<group>"; };
+		CECF11781BC2165C007887A5 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CED9D41D1BC1D8C7002C7588 /* ios-tumblr-poster-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-tumblr-poster-Bridging-Header.h"; sourceTree = "<group>"; };
 		CED9D4221BC1D9CC002C7588 /* TumblrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrClient.swift; sourceTree = "<group>"; };
 		CED9D4261BC1DA58002C7588 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				CE3040801BBCAC0A00258482 /* AppDelegate.swift */,
 				CED9D4261BC1DA58002C7588 /* LoginViewController.swift */,
 				CED9D4281BC1DA7E002C7588 /* CameraRollViewController.swift */,
+				CECF11781BC2165C007887A5 /* SettingsViewController.swift */,
 				CE3040841BBCAC0B00258482 /* Main.storyboard */,
 				CE3040871BBCAC0B00258482 /* Images.xcassets */,
 				CE3040891BBCAC0B00258482 /* LaunchScreen.xib */,
@@ -303,6 +306,7 @@
 				CED9D4231BC1D9CC002C7588 /* TumblrClient.swift in Sources */,
 				CE239FD91BC1E0FB007498E0 /* User.swift in Sources */,
 				CED9D4291BC1DA7E002C7588 /* CameraRollViewController.swift in Sources */,
+				CECF11791BC2165C007887A5 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

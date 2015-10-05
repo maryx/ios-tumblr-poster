@@ -62,6 +62,11 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
     }
         
     func openURL(url: NSURL) {
+        if (url.query == nil) { // user does not authorize app
+            println("user failed to authorize app. going back.")
+            self.loginCompletion?(user: nil, error: nil) // no one logged in
+            return
+        }
         fetchAccessTokenWithPath("https://www.tumblr.com/oauth/access_token",
             method: "POST",
             requestToken: BDBOAuth1Credential(queryString: url.query),

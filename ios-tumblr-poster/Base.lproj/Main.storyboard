@@ -13,23 +13,25 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4dq-Q7-ydk">
-                                <rect key="frame" x="92" y="91" width="112" height="30"/>
+                                <rect key="frame" x="104" y="91" width="112" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log In to Tumblr">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="clickedLoginButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="232-x2-qMI"/>
-                                    <segue destination="Iik-Yd-M1A" kind="modal" identifier="loginSegue" id="ubj-SP-JNf"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="XOi-ZW-ce4" kind="modal" identifier="loginSegue" id="b2e-dY-VWn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="162.66666666666666" y="349.31999999999999"/>
+            <point key="canvasLocation" x="-172" y="-309"/>
         </scene>
         <!--Camera Roll View Controller-->
         <scene sceneID="TQ5-vy-5uS">
@@ -38,25 +40,91 @@
                     <view key="view" contentMode="scaleToFill" id="okZ-df-Rxl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wCa-5y-sHN">
-                                <rect key="frame" x="78" y="140" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log Out">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="clickedLogout:" destination="Iik-Yd-M1A" eventType="touchUpInside" id="czW-0Q-lcf"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Uet-qg-GgS"/>
+                    <navigationItem key="navigationItem" id="Uet-qg-GgS">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="f0R-oc-Xd1">
+                            <connections>
+                                <action selector="clickedLogout:" destination="Iik-Yd-M1A" id="Fd7-q1-CmO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="SR7-KR-AHZ">
+                            <connections>
+                                <segue destination="gnW-9Z-z3l" kind="modal" id="ykU-NS-hcW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sS5-6v-2WR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="634" y="352"/>
+            <point key="canvasLocation" x="186" y="323"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="mkQ-J1-NE0">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="YMB-co-mzz" customClass="SettingsViewController" customModule="ios_tumblr_poster" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p0g-LD-FxP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="mcc-A3-XyP">
+                        <barButtonItem key="leftBarButtonItem" title="Wait go back" id="9Uk-gU-I8g">
+                            <connections>
+                                <action selector="clickedCancelButton:" destination="YMB-co-mzz" id="vje-K2-huz"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="gaD-Jg-bXy">
+                            <connections>
+                                <action selector="clickedSaveButton:" destination="YMB-co-mzz" id="44x-3K-g9M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="9Uk-gU-I8g" id="Ead-Vp-cQV"/>
+                        <outlet property="saveButton" destination="gaD-Jg-bXy" id="L69-ne-x1x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w4q-BV-TgL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="894" y="323"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5fK-XC-owH">
+            <objects>
+                <navigationController storyboardIdentifier="CameraRollNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="XOi-ZW-ce4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="aVJ-2b-1HQ"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Dgb-qq-0g8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Iik-Yd-M1A" kind="relationship" relationship="rootViewController" id="Zpe-fK-zMp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c9I-XH-1hw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-172" y="323"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="52g-Ra-Jwq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gnW-9Z-z3l" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DmT-Ut-8vV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YMB-co-mzz" kind="relationship" relationship="rootViewController" id="F9p-ks-l2W"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dyd-HA-A7U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="534" y="323"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

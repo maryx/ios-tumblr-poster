@@ -19,9 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         
         if (User.currentUser != nil) {
-            // go log in
-            println("current user: \(User.currentUser?.name)")
-            var vc = storyboard.instantiateViewControllerWithIdentifier("CameraRollViewController") as! UIViewController
+            // you want the navigation controller to get called. Otherwise only the camera roll view controller gets called
+            // and you lose your navigation bar. augh.
+            var vc = storyboard.instantiateViewControllerWithIdentifier("CameraRollNavigationController") as! UIViewController
+            window?.rootViewController = vc
+        } else {
+            var vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
             window?.rootViewController = vc
         }
         return true

@@ -25,6 +25,7 @@ class CameraRollViewController: UIViewController {
     @IBAction func clickedLogout(sender: AnyObject) {
         User.currentUser?.logout()
     }
+    
     /*
     // MARK: - Navigation
 

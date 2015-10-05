@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  SettingsViewController.swift
 //  ios-tumblr-poster
 //
 //  Created by Mary Xia on 10/4/15.
@@ -8,7 +8,11 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class SettingsViewController: UIViewController {
+
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +25,12 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func clickedLoginButton(sender: AnyObject) {
-        TumblrClient.sharedInstance.loginWithCompletion() {
-            (user: User?, error: NSError?) in
-            println(user)
-            if (user != nil) {
-                self.performSegueWithIdentifier("loginSegue", sender: self)
-            } else {
-                println("not logged in")
-            }
-        }
+    @IBAction func clickedCancelButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    @IBAction func clickedSaveButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*
