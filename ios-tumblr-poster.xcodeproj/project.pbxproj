@@ -18,6 +18,8 @@
 		CED9D4231BC1D9CC002C7588 /* TumblrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9D4221BC1D9CC002C7588 /* TumblrClient.swift */; };
 		CED9D4271BC1DA58002C7588 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9D4261BC1DA58002C7588 /* LoginViewController.swift */; };
 		CED9D4291BC1DA7E002C7588 /* CameraRollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9D4281BC1DA7E002C7588 /* CameraRollViewController.swift */; };
+		CEDF82051BC2520300E89613 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDF82041BC2520300E89613 /* Photos.framework */; };
+		CEDF820B1BC2E19500E89613 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF820A1BC2E19500E89613 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		CED9D4221BC1D9CC002C7588 /* TumblrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TumblrClient.swift; sourceTree = "<group>"; };
 		CED9D4261BC1DA58002C7588 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CED9D4281BC1DA7E002C7588 /* CameraRollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraRollViewController.swift; sourceTree = "<group>"; };
+		CEDF82041BC2520300E89613 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		CEDF820A1BC2E19500E89613 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDF82051BC2520300E89613 /* Photos.framework in Frameworks */,
 				A8E26B47C881CCE4D3A680C1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +78,7 @@
 		2EC3ACD25CCB8B89C527FD2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEDF82041BC2520300E89613 /* Photos.framework */,
 				ADDC9FFC09918D5316DCA01E /* libPods.a */,
 			);
 			name = Frameworks;
@@ -115,6 +121,7 @@
 				CE3040801BBCAC0A00258482 /* AppDelegate.swift */,
 				CED9D4261BC1DA58002C7588 /* LoginViewController.swift */,
 				CED9D4281BC1DA7E002C7588 /* CameraRollViewController.swift */,
+				CEDF820A1BC2E19500E89613 /* PhotoCell.swift */,
 				CECF11781BC2165C007887A5 /* SettingsViewController.swift */,
 				CE3040841BBCAC0B00258482 /* Main.storyboard */,
 				CE3040871BBCAC0B00258482 /* Images.xcassets */,
@@ -301,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEDF820B1BC2E19500E89613 /* PhotoCell.swift in Sources */,
 				CED9D4271BC1DA58002C7588 /* LoginViewController.swift in Sources */,
 				CE3040811BBCAC0A00258482 /* AppDelegate.swift in Sources */,
 				CED9D4231BC1D9CC002C7588 /* TumblrClient.swift in Sources */,
