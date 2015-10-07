@@ -11,11 +11,26 @@ import UIKit
 class PhotoCell: UICollectionViewCell {
     
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var PostButton: UIButton!
+    @IBOutlet weak var EditButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         println(photoView)
     }
 
+    @IBAction func clickedPostButton(sender: AnyObject) {
+        var blogName = "yonderdale.tumblr.com"
+        var params = [String: AnyObject]()
+        params["type"] = "photo"
+        params["data64"] = UIImagePNGRepresentation(photoView.image).base64EncodedStringWithOptions(nil)
+        
+        TumblrClient.sharedInstance.postToTumblr(blogName, params: params, completion: {(result, error) -> () in
+            println("done posting")
+        })
+    }
+    @IBAction func clickedEditButton(sender: AnyObject) {
+        println("clicked edit")
+    }
+    
 }

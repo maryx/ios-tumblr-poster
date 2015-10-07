@@ -20,15 +20,13 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         collectionView.delegate = self
         photos = []
         
-//        var assetCollection = PHAssetCollection.fetchAssetCollectionsWithType(PHAssetCollectionType.Album, subtype: PHAssetCollectionSubtype.AlbumMyPhotoStream, options: nil)
-
         var assets = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: nil)
         var manager = PHImageManager.defaultManager()
         
         var i = 0
         for i in 0..<assets.count {
             var asset = assets.objectAtIndex(i) as! PHAsset
-            var imageSize = CGSize(width: 100, height: 100)
+            var imageSize = CGSize(width: 300, height: 300)
             var options = PHImageRequestOptions()
             options.resizeMode = PHImageRequestOptionsResizeMode.Exact
             options.deliveryMode = PHImageRequestOptionsDeliveryMode.Opportunistic
@@ -39,14 +37,9 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
                 options: options)
                 {(image, info) -> Void in
                     self.photos.append(image)
-//                    self.photoView.image = image
                 }
         }
         println(photos.count)
-
-        var photoLibrary = PHPhotoLibrary.sharedPhotoLibrary()
-//        var photoAssets = PHAsset.fetchAssetsInAssetCollection(PHAssetCollection, options: nil)
-        println("hey")
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,6 +63,13 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         
         cell.photoView.image = photo
         return cell
+    }
+
+    // optional override
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // post image to tumblr
+        
+        
     }
 
     /*

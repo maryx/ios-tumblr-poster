@@ -24,7 +24,20 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
         }
         return Static.instance
     }
-    
+
+    func postToTumblr(blogName: String, params: [String: AnyObject], completion: (result: String?, error: NSError?) -> ()) {
+        POST("/v2/blog/" + blogName + "/post",
+            parameters: params,
+            success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+                println("success")
+                //do stuff
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                //do stuff
+                println(error)
+                completion(result: nil, error: nil)
+            })
+    }
 //        func homeTimelineWithCompletion(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
 //            GET("1.1/statuses/home_timeline.json",
 //                parameters: params,
