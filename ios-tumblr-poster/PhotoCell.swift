@@ -11,16 +11,22 @@ import UIKit
 class PhotoCell: UICollectionViewCell {
     
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var photoBlur: UIVisualEffectView!
     @IBOutlet weak var PostButton: UIButton!
     @IBOutlet weak var EditButton: UIButton!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var defaults = NSUserDefaults.standardUserDefaults()
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        photoBlur.alpha = 0
+        loadingIndicator.alpha = 0
     }
 
     @IBAction func clickedPostButton(sender: AnyObject) {
+        loadingIndicator.alpha = 1
+        loadingIndicator.startAnimating()
         println(defaults.objectForKey("blogNames"))
         var blogName = defaults.stringForKey("blogName") as String!
         var params = [String: AnyObject]()
@@ -31,6 +37,9 @@ class PhotoCell: UICollectionViewCell {
         params["caption"] = defaults.stringForKey("text") as String!
         
         TumblrClient.sharedInstance.postToTumblr(blogName, params: params, completion: {(result, error) -> () in
+            self.photoBlur.alpha = 0.5
+            self.loadingIndicator.alpha = 0
+            self.loadingIndicator.stopAnimating()
             println("done posting")
         })
     }

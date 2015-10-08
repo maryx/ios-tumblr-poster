@@ -32,6 +32,7 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
             success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
                 println("posted to tumblr")
                 //do stuff
+                completion(result: nil, error: nil)
             },
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 //do stuff

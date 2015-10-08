@@ -27,8 +27,9 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         var i = 0
         for i in 0..<assets.count {
             var asset = assets.objectAtIndex(i) as! PHAsset
-            var imageSize = CGSize(width: 300, height: 300)
+            var imageSize = PHImageManagerMaximumSize//CGSize(width: 800.0, height: 800.0)
             var options = PHImageRequestOptions()
+            options.synchronous = true
             options.resizeMode = PHImageRequestOptionsResizeMode.Exact
             options.deliveryMode = PHImageRequestOptionsDeliveryMode.Opportunistic
             

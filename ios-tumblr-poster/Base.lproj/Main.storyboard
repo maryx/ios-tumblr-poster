@@ -52,7 +52,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="8li-de-k2c" customClass="PhotoCell" customModule="ios_tumblr_poster" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="143" height="191"/>
+                                        <rect key="frame" x="0.0" y="64" width="143" height="191"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="143" height="191"/>
@@ -63,7 +63,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0gf-Sn-SRa">
-                                                    <rect key="frame" x="13" y="153" width="32" height="30"/>
+                                                    <rect key="frame" x="8" y="153" width="32" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Post">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -82,6 +82,20 @@
                                                         <action selector="clickedEditButton:" destination="8li-de-k2c" eventType="touchUpInside" id="RTI-oB-dzF"/>
                                                     </connections>
                                                 </button>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" id="kLK-cL-hxI">
+                                                    <rect key="frame" x="19" y="26" width="100" height="96"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nab-qW-QPv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="96"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <color key="backgroundColor" red="0.47058826679999999" green="0.90196084980000002" blue="0.43921571970000001" alpha="1" colorSpace="deviceRGB"/>
+                                                    </view>
+                                                    <blurEffect style="light"/>
+                                                </visualEffectView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" id="gMG-9k-07c">
+                                                    <rect key="frame" x="61" y="157" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -89,6 +103,8 @@
                                         <connections>
                                             <outlet property="EditButton" destination="J0U-Y1-rgh" id="uFS-l2-SUa"/>
                                             <outlet property="PostButton" destination="0gf-Sn-SRa" id="pZ8-EU-eH3"/>
+                                            <outlet property="loadingIndicator" destination="gMG-9k-07c" id="krj-aS-D5n"/>
+                                            <outlet property="photoBlur" destination="kLK-cL-hxI" id="G3c-dg-fBz"/>
                                             <outlet property="photoView" destination="AqV-Gr-4Yk" id="SeQ-vy-NBt"/>
                                         </connections>
                                     </collectionViewCell>
