@@ -13,6 +13,7 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
 
     @IBOutlet weak var collectionView: UICollectionView!
     var photos: [UIImage]!
+    var defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()

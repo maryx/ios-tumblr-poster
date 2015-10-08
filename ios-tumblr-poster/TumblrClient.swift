@@ -15,7 +15,8 @@ let tumblrBaseURL = NSURL(string: "https://api.tumblr.com")
 class TumblrClient: BDBOAuth1RequestOperationManager {
     
     var loginCompletion: ((user: User?, error: NSError?) -> ())? // we have to store this for some reason
-        
+    var defaults = NSUserDefaults.standardUserDefaults()
+    
     class var sharedInstance: TumblrClient { // this is sorta like a class so you don't have to declare the consumer key/secret more than once
         struct Static {
             static let instance = TumblrClient(baseURL: tumblrBaseURL,
@@ -29,7 +30,7 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
         POST("/v2/blog/" + blogName + "/post",
             parameters: params,
             success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                println("success")
+                println("posted to tumblr")
                 //do stuff
             },
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
@@ -38,21 +39,6 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
                 completion(result: nil, error: nil)
             })
     }
-//        func homeTimelineWithCompletion(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
-//            GET("1.1/statuses/home_timeline.json",
-//                parameters: params,
-//                success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-//                    var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
-//                    completion(tweets: tweets, error: nil)
-//                    //                for tweet in tweets {
-//                    //                    println("text: \(tweet.text), createdAt: \(tweet.createdAt)")
-//                    //                }
-//                },
-//                failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-//                    println("failed to get home timeline")
-//                    completion(tweets: nil, error: nil)
-//            })
-//        }
         
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()) {
         loginCompletion = completion
@@ -95,7 +81,8 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
                         var user = User(user: userData as NSDictionary)
                         User.currentUser = user
                         println(User.currentUser?.name)
-                        println(User.currentUser?.blogs?.count)
+                        println(User.currentUser?.blogs.count)
+                        println(User.currentUser?.blogs)
                         self.loginCompletion?(user: user, error: nil)
                     },
                     failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in

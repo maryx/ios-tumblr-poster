@@ -15,13 +15,22 @@ let userDidLogoutNotification = "userDidLogoutNotification"
 
 class User: NSObject {
     var name: String?
-    var blogs: NSArray?
+    var blogs: NSArray
     var dictionary: NSDictionary
+
+    var defaults = NSUserDefaults.standardUserDefaults()
     
     init(user: NSDictionary) { // the data passed in has 2 outer wrappers that we don't need.
         self.dictionary = user as NSDictionary
         name = dictionary["name"] as? String
-        blogs = dictionary["blogs"] as? NSArray
+        blogs = dictionary["blogs"] as! NSArray
+        var blogNames = [String]()
+        var i = 0
+        for i in 0..<blogs.count {
+            blogNames.append(blogs[i]["name"] as! String)
+        }
+        defaults.setObject(blogNames, forKey: "blogNames")
+        println(defaults.objectForKey("blogNames"))
     }
     
     func logout() {

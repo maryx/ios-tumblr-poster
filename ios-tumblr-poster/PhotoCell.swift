@@ -14,16 +14,21 @@ class PhotoCell: UICollectionViewCell {
     @IBOutlet weak var PostButton: UIButton!
     @IBOutlet weak var EditButton: UIButton!
     
+    var defaults = NSUserDefaults.standardUserDefaults()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        println(photoView)
     }
 
     @IBAction func clickedPostButton(sender: AnyObject) {
-        var blogName = "yonderdale.tumblr.com"
+        println(defaults.objectForKey("blogNames"))
+        var blogName = defaults.stringForKey("blogName") as String!
         var params = [String: AnyObject]()
         params["type"] = "photo"
         params["data64"] = UIImagePNGRepresentation(photoView.image).base64EncodedStringWithOptions(nil)
+        params["state"] = "published"
+        params["tags"] = defaults.stringForKey("tags") as String!
+        params["caption"] = defaults.stringForKey("text") as String!
         
         TumblrClient.sharedInstance.postToTumblr(blogName, params: params, completion: {(result, error) -> () in
             println("done posting")
