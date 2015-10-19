@@ -17,6 +17,7 @@ class User: NSObject {
     var name: String?
     var blogs: NSArray
     var dictionary: NSDictionary
+    var postedPhotos: [String] // array of photos that have already been posted
 
     var defaults = NSUserDefaults.standardUserDefaults()
     
@@ -24,6 +25,10 @@ class User: NSObject {
         self.dictionary = user as NSDictionary
         name = dictionary["name"] as? String
         blogs = dictionary["blogs"] as! NSArray
+        if (defaults.objectForKey("postedPhotos") == nil) {
+            defaults.setObject([], forKey: "postedPhotos")
+        }
+        postedPhotos = defaults.objectForKey("postedPhotos") as! [String]
         var blogNames = [String]()
         var i = 0
         for i in 0..<blogs.count {
@@ -34,6 +39,7 @@ class User: NSObject {
     }
     
     func logout() {
+        postedPhotos = defaults.objectForKey("postedPhotos") as! [String] // update photos prior to logging out
         User.currentUser = nil
         TumblrClient.sharedInstance.requestSerializer.removeAccessToken()
         NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)

@@ -13,6 +13,7 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
 
     @IBOutlet weak var collectionView: UICollectionView!
     var photos: [UIImage]!
+    var photoURLs: [String]!
     var defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
@@ -20,6 +21,7 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         collectionView.dataSource = self
         collectionView.delegate = self
         photos = []
+        photoURLs = []
         
         var assets = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: nil)
         var manager = PHImageManager.defaultManager()
@@ -39,9 +41,15 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
                 options: options)
                 {(image, info) -> Void in
                     self.photos.append(image)
+
+                    let description = info.description.lowercaseString
+                    let regex = "file:([^ ,])*" // Gets PHImageFileURLKey
+                    if let match = description.rangeOfString(regex, options: .RegularExpressionSearch){
+                        self.photoURLs.append(description.substringWithRange(match))
+                    }
+
                 }
         }
-        println(photos.count)
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,8 +70,14 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCell
         let photo = photos![indexPath.row] // get photo
+        let photoURL = photoURLs![indexPath.row] // get photo url
         
         cell.photoView.image = photo
+        cell.photoURL = photoURL
+
+        if let posted = find(defaults.objectForKey("postedPhotos") as! [String], cell.photoURL) {
+            cell.photoBlur.alpha = 0.5
+        }
         return cell
     }
 
