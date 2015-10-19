@@ -63,23 +63,13 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0gf-Sn-SRa">
-                                                    <rect key="frame" x="8" y="153" width="32" height="30"/>
+                                                    <rect key="frame" x="0.0" y="153" width="32" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Post">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="clickedPostButton:" destination="8li-de-k2c" eventType="touchUpInside" id="omk-Mw-1jF"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J0U-Y1-rgh">
-                                                    <rect key="frame" x="96" y="153" width="30" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Edit">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="clickedEditButton:" destination="8li-de-k2c" eventType="touchUpInside" id="RTI-oB-dzF"/>
                                                     </connections>
                                                 </button>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" id="kLK-cL-hxI">
@@ -93,9 +83,29 @@
                                                     <blurEffect style="light"/>
                                                 </visualEffectView>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" id="gMG-9k-07c">
-                                                    <rect key="frame" x="61" y="157" width="20" height="20"/>
+                                                    <rect key="frame" x="61" y="133" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </activityIndicatorView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SFF-pU-nCj">
+                                                    <rect key="frame" x="49" y="153" width="45" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Queue">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="clickedQueueButton:" destination="8li-de-k2c" eventType="touchUpInside" id="Dwc-UR-PHj"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J0U-Y1-rgh">
+                                                    <rect key="frame" x="113" y="153" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Edit">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="clickedEditButton:" destination="8li-de-k2c" eventType="touchUpInside" id="RTI-oB-dzF"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -103,6 +113,7 @@
                                         <connections>
                                             <outlet property="EditButton" destination="J0U-Y1-rgh" id="uFS-l2-SUa"/>
                                             <outlet property="PostButton" destination="0gf-Sn-SRa" id="pZ8-EU-eH3"/>
+                                            <outlet property="QueueButton" destination="SFF-pU-nCj" id="9Wh-Yi-jHk"/>
                                             <outlet property="loadingIndicator" destination="gMG-9k-07c" id="krj-aS-D5n"/>
                                             <outlet property="photoBlur" destination="kLK-cL-hxI" id="G3c-dg-fBz"/>
                                             <outlet property="photoView" destination="AqV-Gr-4Yk" id="SeQ-vy-NBt"/>
@@ -155,8 +166,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" minimumFontSize="17" id="i0I-jK-VF1">
-                                <rect key="frame" x="16" y="111" width="288" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="i0I-jK-VF1">
+                                <rect key="frame" x="16" y="111" width="191" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -189,6 +200,30 @@
                                     <action selector="updatedTags:" destination="YMB-co-mzz" eventType="editingDidEnd" id="QxU-OI-D8s"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".tumblr.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vfX-eD-Bia">
+                                <rect key="frame" x="215" y="115" width="91" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You aren't allowed to post to that blog" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fkY-6J-Pyh">
+                                <rect key="frame" x="18" y="142" width="293" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.98431372549999996" green="0.0" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T7v-x2-PNh">
+                                <rect key="frame" x="13" y="534" width="172" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Clear Posted Image Data">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickedClearDataButton:" destination="YMB-co-mzz" eventType="touchUpInside" id="Jmn-TD-C7J"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -207,6 +242,8 @@
                     <connections>
                         <outlet property="blogName" destination="i0I-jK-VF1" id="RuJ-fi-TbI"/>
                         <outlet property="cancelButton" destination="9Uk-gU-I8g" id="Ead-Vp-cQV"/>
+                        <outlet property="clearDataButton" destination="T7v-x2-PNh" id="Wog-DR-2ew"/>
+                        <outlet property="errorMessage" destination="fkY-6J-Pyh" id="9UZ-y6-QQm"/>
                         <outlet property="saveButton" destination="gaD-Jg-bXy" id="L69-ne-x1x"/>
                         <outlet property="tags" destination="7pB-eo-mgl" id="8XJ-Vq-ssl"/>
                         <outlet property="text" destination="RHT-My-H3G" id="LjE-qq-vhE"/>

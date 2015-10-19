@@ -13,6 +13,7 @@ class PhotoCell: UICollectionViewCell {
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var photoBlur: UIVisualEffectView!
     @IBOutlet weak var PostButton: UIButton!
+    @IBOutlet weak var QueueButton: UIButton!
     @IBOutlet weak var EditButton: UIButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
@@ -21,37 +22,54 @@ class PhotoCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.loadingIndicator.alpha = 0
-        self.photoBlur.alpha = 0
+        loadingIndicator.hidden = true
+        photoBlur.alpha = 0.5
+        photoBlur.hidden = true
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
 
     @IBAction func clickedPostButton(sender: AnyObject) {
+        sendPhoto("published")
+    }
+    
+    @IBAction func clickedQueueButton(sender: AnyObject) {
+        sendPhoto("queue")
+    }
+
+    private func sendPhoto(postState: String) {
         var postedPhotos = defaults.objectForKey("postedPhotos") as! [String]
         if let index = find(postedPhotos, photoURL) {
-            println("already posted this one")
+            println("already posted/queued this one")
         } else {
-            loadingIndicator.alpha = 1
+            loadingIndicator.hidden = false
             loadingIndicator.startAnimating()
             println(defaults.objectForKey("blogNames"))
-            var blogName = defaults.stringForKey("blogName") as String!
+            var blogName = (defaults.stringForKey("blogName") as String!) + ".tumblr.com"
             var params = [String: AnyObject]()
             params["type"] = "photo"
             params["data64"] = UIImagePNGRepresentation(photoView.image).base64EncodedStringWithOptions(nil)
-            params["state"] = "published"
+            params["state"] = postState
             params["tags"] = defaults.stringForKey("tags") as String!
             params["caption"] = defaults.stringForKey("text") as String!
             TumblrClient.sharedInstance.postToTumblr(blogName, params: params, completion: {(result, error) -> () in
-                self.photoBlur.alpha = 0.5
-                self.loadingIndicator.alpha = 0
+                self.photoBlur.hidden = false
+                self.loadingIndicator.hidden = true
                 self.loadingIndicator.stopAnimating()
                 postedPhotos.append(self.photoURL)
                 self.defaults.setObject(postedPhotos, forKey: "postedPhotos")
-                println("done posting")
+                self.defaults.synchronize()
+                println("done posting/queuing")
             })
         }
     }
 
     @IBAction func clickedEditButton(sender: AnyObject) {
+        // gonna just rotate for now
+        var rotatedImage = UIImage(CGImage: photoView.image!.CGImage, scale: 1.0, orientation: .DownMirrored)
+        photoView.image = rotatedImage
         println("clicked edit")
     }
     

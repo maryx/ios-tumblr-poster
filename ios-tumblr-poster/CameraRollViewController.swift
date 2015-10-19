@@ -29,7 +29,7 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         var i = 0
         for i in 0..<assets.count {
             var asset = assets.objectAtIndex(i) as! PHAsset
-            var imageSize = PHImageManagerMaximumSize//CGSize(width: 800.0, height: 800.0)
+            var imageSize = PHImageManagerMaximumSize //CGSize(width: 800.0, height: 800.0)
             var options = PHImageRequestOptions()
             options.synchronous = true
             options.resizeMode = PHImageRequestOptionsResizeMode.Exact
@@ -63,7 +63,11 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        if (photos != nil) {
+            return photos.count
+        } else {
+            return 0
+        }
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -76,7 +80,7 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         cell.photoURL = photoURL
 
         if let posted = find(defaults.objectForKey("postedPhotos") as! [String], cell.photoURL) {
-            cell.photoBlur.alpha = 0.5
+            cell.photoBlur.hidden = false
         }
         return cell
     }

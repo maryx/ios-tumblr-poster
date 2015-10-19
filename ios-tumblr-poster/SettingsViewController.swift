@@ -15,11 +15,14 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var blogName: UITextField!
     @IBOutlet weak var text: UITextField!
     @IBOutlet weak var tags: UITextField!
+    @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var clearDataButton: UIButton!
 
     var defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorMessage.hidden = true
         // grab previously saved values
         println(blogName.text)
         blogName.text = defaults.stringForKey("blogName")
@@ -37,8 +40,23 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func updatedBlogName(sender: AnyObject) {
-        defaults.setObject(blogName.text, forKey: "updatedBlogName")
-        defaults.synchronize()
+        validateBlogName()
+    }
+    
+    func validateBlogName() -> Bool {
+        if let ownsBlog = find(defaults.objectForKey("blogNames") as! [String], blogName.text.lowercaseString) {
+            defaults.setObject(blogName.text, forKey: "updatedBlogName")
+            defaults.synchronize()
+            saveButton.enabled = true
+            blogName.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+            errorMessage.hidden = true
+            return true
+        } else {
+            saveButton.enabled = false
+            blogName.textColor = UIColor(red: 255, green: 0, blue: 0, alpha: 1)
+            errorMessage.hidden = false
+            return false
+        }
     }
     
     @IBAction func updatedText(sender: AnyObject) {
@@ -56,13 +74,20 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func clickedSaveButton(sender: AnyObject) {
-        defaults.setObject(blogName.text, forKey: "blogName")
-        defaults.setObject(text.text, forKey: "text")
-        defaults.setObject(tags.text, forKey: "tags")
-        defaults.synchronize()
-        dismissViewControllerAnimated(true, completion: nil)
+        if (validateBlogName()) {
+            defaults.setObject(blogName.text, forKey: "blogName")
+            defaults.setObject(text.text, forKey: "text")
+            defaults.setObject(tags.text, forKey: "tags")
+            defaults.synchronize()
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 
+    
+    @IBAction func clickedClearDataButton(sender: AnyObject) {
+        defaults.setObject([], forKey: "postedPhotos")
+        defaults.synchronize()
+    }
     /*
     // MARK: - Navigation
 

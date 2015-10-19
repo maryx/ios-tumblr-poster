@@ -32,10 +32,14 @@ class User: NSObject {
         var blogNames = [String]()
         var i = 0
         for i in 0..<blogs.count {
-            blogNames.append(blogs[i]["name"] as! String)
+            blogNames.append((blogs[i]["name"] as! String).lowercaseString)
         }
         defaults.setObject(blogNames, forKey: "blogNames")
-        println(defaults.objectForKey("blogNames"))
+        println(defaults.stringForKey("blogName"))
+        if (defaults.stringForKey("blogName") == nil) { // If you didn't set your default blog yet
+            defaults.setObject(blogNames[0], forKey: "blogName")
+        }
+        defaults.synchronize()
     }
     
     func logout() {
