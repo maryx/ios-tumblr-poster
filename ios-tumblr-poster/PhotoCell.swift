@@ -8,6 +8,11 @@
 
 import UIKit
 
+
+@objc protocol PhotoCellDelegate { // Needed to prevent cell reuse from messing up styles
+    optional func photoCell(photoCell: PhotoCell, didChangeValue value: Bool)
+}
+
 class PhotoCell: UICollectionViewCell {
     
     @IBOutlet weak var photoView: UIImageView!
@@ -17,6 +22,8 @@ class PhotoCell: UICollectionViewCell {
     @IBOutlet weak var EditButton: UIButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
+    weak var delegate: PhotoCellDelegate? // This prevents cell reuse from causing the styles to be off
+
     var defaults = NSUserDefaults.standardUserDefaults()
     var photoURL = ""
     
@@ -25,6 +32,9 @@ class PhotoCell: UICollectionViewCell {
         loadingIndicator.hidden = true
         photoBlur.alpha = 0.5
         photoBlur.hidden = true
+        // Does UI stuff
+        PostButton.addTarget(self, action: "blurredImage", forControlEvents: UIControlEvents.AllTouchEvents)
+        QueueButton.addTarget(self, action: "blurredImage", forControlEvents: UIControlEvents.AllTouchEvents)
     }
 
     override func layoutSubviews() {
@@ -73,4 +83,8 @@ class PhotoCell: UICollectionViewCell {
         println("clicked edit")
     }
     
+    func blurredImage() {
+        delegate?.photoCell?(self, didChangeValue: false)
+        println("reached blurred image")
+    }
 }

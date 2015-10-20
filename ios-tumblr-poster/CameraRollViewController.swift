@@ -9,11 +9,13 @@
 import UIKit
 import Photos // framework
 
-class CameraRollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class CameraRollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, PhotoCellDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     var photos: [UIImage]!
     var photoURLs: [String]!
+
+    var photoStates = [Int:Bool]() // stuff for cell reuse UI issues
     var defaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
@@ -61,7 +63,6 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         User.currentUser?.logout()
     }
     
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (photos != nil) {
             return photos.count
@@ -79,17 +80,27 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         cell.photoView.image = photo
         cell.photoURL = photoURL
 
+        // stuff for cell reuse UI issues
+        cell.delegate = self
         if let posted = find(defaults.objectForKey("postedPhotos") as! [String], cell.photoURL) {
-            cell.photoBlur.hidden = false
+            println(photoStates[indexPath.row])
+            cell.photoBlur.hidden = photoStates[indexPath.row] ?? false
+        } else {
+            cell.photoBlur.hidden = photoStates[indexPath.row] ?? true
         }
         return cell
     }
 
-    // optional override
+    // optional override // not sure what this func is doing here. Maybe can delete later.
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // post image to tumblr
-        
-        
+    }
+
+    // stuff for cell reuse UI issues
+    func photoCell(photoCell: PhotoCell, didChangeValue value: Bool) {
+        let indexPath = collectionView.indexPathForCell(photoCell)!
+        //do something here
+        photoStates[indexPath.row] = value
     }
 
     /*
