@@ -30,8 +30,9 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         
         var i = 0
         for i in 0..<assets.count {
-            var asset = assets.objectAtIndex(i) as! PHAsset
+            var asset = assets.objectAtIndex(assets.count-1-i) as! PHAsset // get from most recent to old
             var imageSize = PHImageManagerMaximumSize //CGSize(width: 800.0, height: 800.0)
+            println(PHImageManagerMaximumSize)
             var options = PHImageRequestOptions()
             options.synchronous = true
             options.resizeMode = PHImageRequestOptionsResizeMode.Exact
@@ -43,7 +44,6 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
                 options: options)
                 {(image, info) -> Void in
                     self.photos.append(image)
-
                     let description = info.description.lowercaseString
                     let regex = "file:([^ ,])*" // Gets PHImageFileURLKey
                     if let match = description.rangeOfString(regex, options: .RegularExpressionSearch){

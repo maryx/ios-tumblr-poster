@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var tags: UITextField!
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var clearDataButton: UIButton!
+    @IBOutlet weak var repostImageToggle: UISwitch!
 
     var defaults = NSUserDefaults.standardUserDefaults()
 
@@ -27,6 +28,7 @@ class SettingsViewController: UIViewController {
         blogName.text = defaults.stringForKey("blogName")
         text.text = defaults.stringForKey("text")
         tags.text = defaults.stringForKey("tags")
+        repostImageToggle.on = defaults.boolForKey("repostImage")
 
 //        // we only want to set the updated fields until we press save
 //        defaults.setObject(blogName.text, forKey: "updatedBlogName")
@@ -67,6 +69,11 @@ class SettingsViewController: UIViewController {
         defaults.setObject(tags.text, forKey: "updatedTags")
         defaults.synchronize()
     }
+
+    @IBAction func updatedRepostImageToggle(sender: AnyObject) {
+        defaults.setObject(repostImageToggle.on, forKey: "updatedRepostImage")
+        defaults.synchronize()
+    }
     
     @IBAction func clickedCancelButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -77,11 +84,11 @@ class SettingsViewController: UIViewController {
             defaults.setObject(blogName.text, forKey: "blogName")
             defaults.setObject(text.text, forKey: "text")
             defaults.setObject(tags.text, forKey: "tags")
+            defaults.setObject(repostImageToggle.on, forKey: "repostImage")
             defaults.synchronize()
             dismissViewControllerAnimated(true, completion: nil)
         }
     }
-
     
     @IBAction func clickedClearDataButton(sender: AnyObject) {
         defaults.setObject([], forKey: "postedPhotos")
