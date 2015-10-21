@@ -24,7 +24,6 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         errorMessage.hidden = true
         // grab previously saved values
-        println(blogName.text)
         blogName.text = defaults.stringForKey("blogName")
         text.text = defaults.stringForKey("text")
         tags.text = defaults.stringForKey("tags")

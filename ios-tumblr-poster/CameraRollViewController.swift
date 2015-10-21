@@ -83,7 +83,6 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         // stuff for cell reuse UI issues
         cell.delegate = self
         if let posted = find(defaults.objectForKey("postedPhotos") as! [String], cell.photoURL) {
-            println(photoStates[indexPath.row])
             cell.photoBlur.hidden = photoStates[indexPath.row] ?? false
         } else {
             cell.photoBlur.hidden = photoStates[indexPath.row] ?? true

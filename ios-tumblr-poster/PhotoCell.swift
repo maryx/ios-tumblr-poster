@@ -29,10 +29,19 @@ class PhotoCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        // Layering stuff -- probably not the right way to do it
+        photoView.layer.zPosition = 1
+        photoBlur.layer.zPosition = 2
+        loadingIndicator.layer.zPosition = 3
+        PostButton.layer.zPosition = 4
+        QueueButton.layer.zPosition = 4
+        EditButton.layer.zPosition = 4
+        
         loadingIndicator.hidden = true
         photoBlur.alpha = 0.5
         photoBlur.hidden = true
-        // Does UI stuff
+        // Does UI stuff for cell reuse problem
         PostButton.addTarget(self, action: "blurredImage", forControlEvents: UIControlEvents.AllTouchEvents)
         QueueButton.addTarget(self, action: "blurredImage", forControlEvents: UIControlEvents.AllTouchEvents)
     }
@@ -54,9 +63,8 @@ class PhotoCell: UICollectionViewCell {
         if let index = find(postedPhotos, photoURL) {
             println("already posted/queued this one")
         } else {
-            loadingIndicator.hidden = false
+            loadingIndicator.hidden = false // this gets a bit buggy with cell reuse UI but it's not important enough to fix
             loadingIndicator.startAnimating()
-            println(defaults.objectForKey("blogNames"))
             var blogName = (defaults.stringForKey("blogName") as String!) + ".tumblr.com"
             var params = [String: AnyObject]()
             params["type"] = "photo"
@@ -78,13 +86,14 @@ class PhotoCell: UICollectionViewCell {
 
     @IBAction func clickedEditButton(sender: AnyObject) {
         // gonna just rotate for now
-        var rotatedImage = UIImage(CGImage: photoView.image!.CGImage, scale: 1.0, orientation: .DownMirrored)
-        photoView.image = rotatedImage
-        println("clicked edit")
+        //var rotatedImage = UIImage(CGImage: photoView.image!.CGImage, scale: 1.0, orientation: .DownMirrored)
+        //photoView.image = rotatedImage
+        UIView.animateWithDuration(0.5, animations: {
+            self.photoView.transform = CGAffineTransformMakeRotation((180.0 * CGFloat(M_PI)) / 180.0)
+        })
     }
     
     func blurredImage() {
         delegate?.photoCell?(self, didChangeValue: false)
-        println("reached blurred image")
     }
 }
