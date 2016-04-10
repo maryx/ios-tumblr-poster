@@ -24,11 +24,11 @@ class LoginViewController: UIViewController {
     @IBAction func clickedLoginButton(sender: AnyObject) {
         TumblrClient.sharedInstance.loginWithCompletion() {
             (user: User?, error: NSError?) in
-            println(user)
+            print(user)
             if (user != nil) {
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             } else {
-                println("not logged in")
+                print("not logged in")
             }
         }
     }

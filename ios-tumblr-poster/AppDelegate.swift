@@ -21,17 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (User.currentUser != nil) {
             // you want the navigation controller to get called. Otherwise only the camera roll view controller gets called
             // and you lose your navigation bar. augh.
-            var vc = storyboard.instantiateViewControllerWithIdentifier("CameraRollNavigationController") as! UIViewController
+            let vc = storyboard.instantiateViewControllerWithIdentifier("CameraRollNavigationController") 
             window?.rootViewController = vc
         } else {
-            var vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+            let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
             window?.rootViewController = vc
         }
         return true
     }
     
     func userDidLogout() {
-        var vc = storyboard.instantiateInitialViewController() as! UIViewController
+       let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
+//        var vc = storyboard.instantiateInitialViewController() as! UIViewController
         window?.rootViewController = vc
     }
 
@@ -58,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // I added this
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         TumblrClient.sharedInstance.openURL(url)
         return true
     }

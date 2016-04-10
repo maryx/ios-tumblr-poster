@@ -35,7 +35,7 @@ class User: NSObject {
             blogNames.append((blogs[i]["name"] as! String).lowercaseString)
         }
         defaults.setObject(blogNames, forKey: "blogNames")
-        println(defaults.stringForKey("blogName"))
+        print(defaults.stringForKey("blogName"))
         if (defaults.stringForKey("blogName") == nil) { // If you didn't set your default blog yet
             defaults.setObject(blogNames[0], forKey: "blogName")
         }
@@ -52,9 +52,9 @@ class User: NSObject {
     class var currentUser: User? {
         get {
         if (_currentUser == nil) {
-        var data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
+        let data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
         if (data != nil) {
-        var dictionary = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: nil) as! NSDictionary
+        let dictionary = (try! NSJSONSerialization.JSONObjectWithData(data!, options: [])) as! NSDictionary
         _currentUser = User(user: dictionary)
         }
         }
@@ -64,7 +64,7 @@ class User: NSObject {
             _currentUser = user
             
             if _currentUser != nil {
-                var data = NSJSONSerialization.dataWithJSONObject(user!.dictionary, options: nil, error: nil)
+                let data = try? NSJSONSerialization.dataWithJSONObject(user!.dictionary, options: [])
                 NSUserDefaults.standardUserDefaults().setObject(data, forKey: currentUserKey)
             } else {
                 NSUserDefaults.standardUserDefaults().setObject(nil, forKey: currentUserKey)

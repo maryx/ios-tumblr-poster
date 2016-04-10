@@ -64,7 +64,7 @@ class PhotoCell: UICollectionViewCell {
     private func sendPhoto(postState: String) {
         var postedPhotos = defaults.objectForKey("postedPhotos") as! [String]
         // If you haven't posted the image before OR if you don't care about reposting, post it again.
-        if ((find(postedPhotos, photoURL) == nil) || (defaults.boolForKey("repostImage") ?? false)) {
+        if ((postedPhotos.indexOf(photoURL) == nil) || (defaults.boolForKey("repostImage") ?? false)) {
             photoBlur.hidden = false // photoBlur has loadingIndicator as a subview so you need to show this one first :/
             loadingIndicator.hidden = false // this gets a bit buggy with cell reuse UI but it's not important enough to fix
             loadingIndicator.startAnimating()
@@ -72,7 +72,7 @@ class PhotoCell: UICollectionViewCell {
             var params = [String: AnyObject]()
             
             params["type"] = "photo"
-            params["data64"] = UIImagePNGRepresentation(self.photoView.image!).base64EncodedStringWithOptions(nil)
+            params["data64"] = UIImagePNGRepresentation(self.photoView.image!)!.base64EncodedStringWithOptions([])
             params["state"] = postState
             params["tags"] = defaults.stringForKey("tags") as String!
             params["caption"] = defaults.stringForKey("text") as String!
@@ -87,21 +87,21 @@ class PhotoCell: UICollectionViewCell {
                 } else {
                     self.QueueButton.setTitle("Queued", forState: UIControlState.Normal)
                 }
-                println("done posting/queuing")
+                print("done posting/queuing")
             })
         } else {
-            println("can't repost an image you already posted")
+            print("can't repost an image you already posted")
         }
     }
 
     @IBAction func clickedEditButton(sender: AnyObject) {
         // Nothing really animates right now
 //        UIView.animateWithDuration(0.5, animations: {
-            self.rotatedImage = UIImage(CGImage: self.photoView.image!.CGImage, scale: 1.0, orientation: .Right)!
+            self.rotatedImage = UIImage(CGImage: self.photoView.image!.CGImage!, scale: 1.0, orientation: .Right)
             self.photoView.image = self.rotatedImage
 
             UIGraphicsBeginImageContext(self.photoView.frame.size)
-            self.photoView.layer.renderInContext(UIGraphicsGetCurrentContext())
+            self.photoView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
             var newImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             self.photoView.image = newImage

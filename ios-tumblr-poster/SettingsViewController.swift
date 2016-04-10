@@ -45,7 +45,7 @@ class SettingsViewController: UIViewController {
     }
     
     func validateBlogName() -> Bool {
-        if let ownsBlog = find(defaults.objectForKey("blogNames") as! [String], blogName.text.lowercaseString) {
+        if let ownsBlog = (defaults.objectForKey("blogNames") as! [String]).indexOf(blogName.text!.lowercaseString) {
             defaults.setObject(blogName.text, forKey: "updatedBlogName")
             defaults.synchronize()
             saveButton.enabled = true

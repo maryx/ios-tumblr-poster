@@ -32,7 +32,7 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
         for i in 0..<assets.count {
             var asset = assets.objectAtIndex(assets.count-1-i) as! PHAsset // get from most recent to old
             var imageSize = PHImageManagerMaximumSize //CGSize(width: 800.0, height: 800.0)
-            println(PHImageManagerMaximumSize)
+            print(PHImageManagerMaximumSize)
             var options = PHImageRequestOptions()
             options.synchronous = true
             options.resizeMode = PHImageRequestOptionsResizeMode.Exact
@@ -43,8 +43,8 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
                 contentMode: PHImageContentMode.AspectFill,
                 options: options)
                 {(image, info) -> Void in
-                    self.photos.append(image)
-                    let description = info.description.lowercaseString
+                    self.photos.append(image!)
+                    let description = info!.description.lowercaseString
                     let regex = "file:([^ ,])*" // Gets PHImageFileURLKey
                     if let match = description.rangeOfString(regex, options: .RegularExpressionSearch){
                         self.photoURLs.append(description.substringWithRange(match))
@@ -73,7 +73,7 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCell
         let photo = photos![indexPath.row] // get photo
         let photoURL = photoURLs![indexPath.row] // get photo url
         
@@ -82,7 +82,7 @@ class CameraRollViewController: UIViewController, UICollectionViewDataSource, UI
 
         // stuff for cell reuse UI issues
         cell.delegate = self
-        if let posted = find(defaults.objectForKey("postedPhotos") as! [String], cell.photoURL) {
+        if let posted = (defaults.objectForKey("postedPhotos") as! [String]).indexOf(cell.photoURL) {
             cell.photoBlur.hidden = photoStates[indexPath.row] ?? false
         } else {
             cell.photoBlur.hidden = photoStates[indexPath.row] ?? true

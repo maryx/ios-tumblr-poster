@@ -30,13 +30,13 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
         POST("/v2/blog/" + blogName + "/post",
             parameters: params,
             success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                println("posted to tumblr")
+                print("posted to tumblr")
                 //do stuff
                 completion(result: nil, error: nil)
             },
             failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 //do stuff
-                println(error)
+                print(error)
                 completion(result: nil, error: nil)
             })
     }
@@ -51,19 +51,19 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
             callbackURL: NSURL(string: "hammy://oauth"),
             scope: nil,
             success: {(requestToken: BDBOAuth1Credential!) -> Void in
-                println("got request token")
-                var authURL = NSURL(string: "https://www.tumblr.com/oauth/authorize?oauth_token=\(requestToken.token)")
+                print("got request token")
+                let authURL = NSURL(string: "https://www.tumblr.com/oauth/authorize?oauth_token=\(requestToken.token)")
                 UIApplication.sharedApplication().openURL(authURL!)
             }
             ) {(error: NSError!) -> Void in
-                println("failed to get request token")
+                print("failed to get request token")
                 self.loginCompletion?(user: nil, error: error) // no one logged in
         }
     }
         
     func openURL(url: NSURL) {
         if (url.query == nil) { // user does not authorize app
-            println("user failed to authorize app. going back.")
+            print("user failed to authorize app. going back.")
             self.loginCompletion?(user: nil, error: nil) // no one logged in
             return
         }
@@ -71,27 +71,27 @@ class TumblrClient: BDBOAuth1RequestOperationManager {
             method: "POST",
             requestToken: BDBOAuth1Credential(queryString: url.query),
             success: {(accessToken: BDBOAuth1Credential!) -> Void in
-                println("got access token")
+                print("got access token")
                 TumblrClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
                 TumblrClient.sharedInstance.GET("v2/user/info",
                     parameters: nil,
                     success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                        var respData = response["response"] as! NSDictionary // unwrapping stuff
-                        var userData = respData["user"] as! NSDictionary // unwrapping stuff
+                        let respData = response["response"] as! NSDictionary // unwrapping stuff
+                        let userData = respData["user"] as! NSDictionary // unwrapping stuff
 
-                        var user = User(user: userData as NSDictionary)
+                        let user = User(user: userData as NSDictionary)
                         User.currentUser = user
-                        println(User.currentUser?.name)
-                        println(User.currentUser?.blogs.count)
-                        println(User.currentUser?.blogs)
+                        print(User.currentUser?.name)
+                        print(User.currentUser?.blogs.count)
+                        print(User.currentUser?.blogs)
                         self.loginCompletion?(user: user, error: nil)
                     },
                     failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                        println("failed to get user")
+                        print("failed to get user")
                         self.loginCompletion?(user: nil, error: error) // no one logged in
                 })
             }) {(error: NSError!) -> Void in
-                println("error getting access token")
+                print("error getting access token")
                 self.loginCompletion?(user: nil, error: error) // no one logged in
         }
     }
